@@ -3,3 +3,5 @@
 ################################################################################
 
 /RestApiTestExercise/bin
+/RestApiTestExercise/obj
+/RestApiTestExercise/.vs/RestApiTestExercise
