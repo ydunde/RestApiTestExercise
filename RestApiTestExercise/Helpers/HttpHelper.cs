@@ -10,22 +10,18 @@ namespace RestApiTestExercise.Helpers
         private readonly RequestHeaderBuilder requestHeaderBuilder;
      
 
-        public HttpHelper(string baseUrl)
+        public HttpHelper()
         {
-                GetClient(baseUrl);
+                GetClient();
             requestHeaderBuilder = new RequestHeaderBuilder();
         }
 
-        public void SetBaseUrl(string baseUrl)
-        {
-            _httpClient.BaseAddress = new Uri(baseUrl);
-
-        }
-        public HttpClient GetClient(string baseUrl)
+        
+        public HttpClient GetClient()
         {
       
             if (_httpClient == null)
-                _httpClient = new HttpClient() { BaseAddress = new Uri(baseUrl) };
+                _httpClient = new HttpClient();
 
             return _httpClient;
 
@@ -56,7 +52,7 @@ namespace RestApiTestExercise.Helpers
             // Adding any additional headers required
             requestHeaderBuilder.AddAdditionalHeaders(headers, request);
 
-            request.RequestUri = new Uri(resourceUri, UriKind.Relative);
+            request.RequestUri = new Uri(resourceUri, UriKind.Absolute);
 
             if (httpMethod.ToUpper() == "POST" || httpMethod.ToUpper() == "PUT")
             {

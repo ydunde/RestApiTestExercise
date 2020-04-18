@@ -93,12 +93,12 @@ namespace RestApiTestExercise.Features
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate the get post with uri returns all post properties for Post 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate the get post with uri returns all post properties for PostId 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Validate Posts")]
-        public virtual void ValidateTheGetPostWithUriReturnsAllPostPropertiesForPost1()
+        public virtual void ValidateTheGetPostWithUriReturnsAllPostPropertiesForPostId1()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate the get post with uri returns all post properties for Post 1", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate the get post with uri returns all post properties for PostId 1", null, ((string[])(null)));
 #line 7
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -120,10 +120,10 @@ namespace RestApiTestExercise.Features
             {
                 this.ScenarioStart();
 #line 8
- testRunner.Given("I have valid endpoint", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have valid endpoint for resource \"posts/1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 9
- testRunner.When("I do a \"GET\" request for resource \"posts/1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I do a \"GET\" request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 10
  testRunner.Then("I should receive the success state as \"true\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -147,13 +147,13 @@ namespace RestApiTestExercise.Features
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate the get post with uri returns all post properties for Post 2 userId 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate the get post with uri returns all post properties for PostId 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Validate Posts")]
-        public virtual void ValidateTheGetPostWithUriReturnsAllPostPropertiesForPost2UserId1()
+        public virtual void ValidateTheGetPostWithUriReturnsAllPostPropertiesForPostId2()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate the get post with uri returns all post properties for Post 2 userId 1", null, ((string[])(null)));
-#line 15
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate the get post with uri returns all post properties for PostId 2", null, ((string[])(null)));
+#line 16
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -173,13 +173,13 @@ namespace RestApiTestExercise.Features
             else
             {
                 this.ScenarioStart();
-#line 16
- testRunner.Given("I have valid endpoint", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
 #line 17
- testRunner.When("I do a \"GET\" request for resource \"posts/2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("I have valid endpoint for resource \"posts/2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 18
+ testRunner.When("I do a \"GET\" request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 19
  testRunner.Then("I should receive the status code as \"200\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -194,18 +194,18 @@ namespace RestApiTestExercise.Features
                             "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores ne" +
                                 "que\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aper" +
                                 "iam non debitis possimus qui neque nisi nulla"});
-#line 19
+#line 20
  testRunner.And("I should expect to see below details in response", ((string)(null)), table2, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        public virtual void ValidateTheAllCommentsGotSamePostIdInTheResults(string propertyName, string propertyValue, string[] exampleTags)
+        public virtual void ValidateAllCommentsReturnedAreRelatedToThePostIdRequestedFor(string postIdValue, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate the all comments got same postId in the results", null, exampleTags);
-#line 23
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate all comments returned are related to the postId requested for", null, exampleTags);
+#line 24
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -225,66 +225,64 @@ namespace RestApiTestExercise.Features
             else
             {
                 this.ScenarioStart();
-#line 24
- testRunner.Given("I have valid endpoint", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
 #line 25
- testRunner.When(string.Format("I do a \"GET\" request for resource \"posts/{0}/comments\"", propertyValue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given(string.Format("I have valid endpoint for resource \"posts/{0}/comments\"", postIdValue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 26
- testRunner.Then("I should receive the status code as \"200\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I do a \"GET\" request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 27
- testRunner.And(string.Format("I should have \"{0}\" as \"{1}\" in comments", propertyName, propertyValue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I should receive the status code as \"200\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 28
+ testRunner.And(string.Format("I should have \"postId\" as \"{0}\" in all comments", postIdValue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate the all comments got same postId in the results: Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate all comments returned are related to the postId requested for: 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Validate Posts")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:propertyName", "postId")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:propertyValue", "1")]
-        public virtual void ValidateTheAllCommentsGotSamePostIdInTheResults_Variant0()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postIdValue", "1")]
+        public virtual void ValidateAllCommentsReturnedAreRelatedToThePostIdRequestedFor_1()
         {
-#line 23
- this.ValidateTheAllCommentsGotSamePostIdInTheResults("postId", "1", ((string[])(null)));
+#line 24
+ this.ValidateAllCommentsReturnedAreRelatedToThePostIdRequestedFor("1", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate the all comments got same postId in the results: Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate all comments returned are related to the postId requested for: 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Validate Posts")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:propertyName", "postId")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:propertyValue", "2")]
-        public virtual void ValidateTheAllCommentsGotSamePostIdInTheResults_Variant1()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postIdValue", "2")]
+        public virtual void ValidateAllCommentsReturnedAreRelatedToThePostIdRequestedFor_2()
         {
-#line 23
- this.ValidateTheAllCommentsGotSamePostIdInTheResults("postId", "2", ((string[])(null)));
+#line 24
+ this.ValidateAllCommentsReturnedAreRelatedToThePostIdRequestedFor("2", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate the all comments got same postId in the results: Variant 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate all comments returned are related to the postId requested for: 3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Validate Posts")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:propertyName", "postId")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:propertyValue", "3")]
-        public virtual void ValidateTheAllCommentsGotSamePostIdInTheResults_Variant2()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postIdValue", "3")]
+        public virtual void ValidateAllCommentsReturnedAreRelatedToThePostIdRequestedFor_3()
         {
-#line 23
- this.ValidateTheAllCommentsGotSamePostIdInTheResults("postId", "3", ((string[])(null)));
+#line 24
+ this.ValidateAllCommentsReturnedAreRelatedToThePostIdRequestedFor("3", ((string[])(null)));
 #line hidden
         }
         
-        public virtual void ValidateAllCommentsForPostIdAreReturned(string postId, string[] exampleTags)
+        public virtual void ValidateAllCommentsReturnedForRequestedPostIdByComparingTheCountInAllCommentsUriComments(string postId, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate all comments for postId are returned", null, exampleTags);
-#line 35
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate all comments returned for requested postId by comparing the count in all" +
+                    " comments uri(/comments)", null, exampleTags);
+#line 36
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -304,64 +302,70 @@ namespace RestApiTestExercise.Features
             else
             {
                 this.ScenarioStart();
-#line 36
- testRunner.Given("I have valid endpoint", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
 #line 37
- testRunner.And("I do a \"GET\" request for resource \"comments\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I have valid endpoint for resource \"comments\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 38
- testRunner.And("I should receive the status code as \"200\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I do a \"GET\" request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 39
- testRunner.And("I should expect to see \"500\" comments in the response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I should receive the status code as \"200\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 40
- testRunner.When(string.Format("I do a \"GET\" request for resource \"posts/{0}/comments\"", postId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I should expect to see \"500\" comments in the response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 41
- testRunner.Then("I should receive the status code as \"200\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And(string.Format("I have valid endpoint for resource \"posts/{0}/comments\"", postId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 42
- testRunner.And(string.Format("I should expect to all comments for postId: \"{0}\" are returned", postId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I do a \"GET\" request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 43
+ testRunner.Then("I should receive the status code as \"200\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 44
+ testRunner.And(string.Format("I should expect all comments for postId: \"{0}\" are returned", postId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate all comments for postId are returned: 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate all comments returned for requested postId by comparing the count in all" +
+            " comments uri(/comments): 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Validate Posts")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postId", "1")]
-        public virtual void ValidateAllCommentsForPostIdAreReturned_1()
+        public virtual void ValidateAllCommentsReturnedForRequestedPostIdByComparingTheCountInAllCommentsUriComments_1()
         {
-#line 35
- this.ValidateAllCommentsForPostIdAreReturned("1", ((string[])(null)));
+#line 36
+ this.ValidateAllCommentsReturnedForRequestedPostIdByComparingTheCountInAllCommentsUriComments("1", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate all comments for postId are returned: 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate all comments returned for requested postId by comparing the count in all" +
+            " comments uri(/comments): 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Validate Posts")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postId", "2")]
-        public virtual void ValidateAllCommentsForPostIdAreReturned_2()
+        public virtual void ValidateAllCommentsReturnedForRequestedPostIdByComparingTheCountInAllCommentsUriComments_2()
         {
-#line 35
- this.ValidateAllCommentsForPostIdAreReturned("2", ((string[])(null)));
+#line 36
+ this.ValidateAllCommentsReturnedForRequestedPostIdByComparingTheCountInAllCommentsUriComments("2", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate all comments for postId are returned: 3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate all comments returned for requested postId by comparing the count in all" +
+            " comments uri(/comments): 3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Validate Posts")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postId", "3")]
-        public virtual void ValidateAllCommentsForPostIdAreReturned_3()
+        public virtual void ValidateAllCommentsReturnedForRequestedPostIdByComparingTheCountInAllCommentsUriComments_3()
         {
-#line 35
- this.ValidateAllCommentsForPostIdAreReturned("3", ((string[])(null)));
+#line 36
+ this.ValidateAllCommentsReturnedForRequestedPostIdByComparingTheCountInAllCommentsUriComments("3", ((string[])(null)));
 #line hidden
         }
         
@@ -369,7 +373,7 @@ namespace RestApiTestExercise.Features
         {
             string[] tagsOfScenario = exampleTags;
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate error reponse for invalid postId for posts", null, exampleTags);
-#line 51
+#line 53
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -389,13 +393,13 @@ namespace RestApiTestExercise.Features
             else
             {
                 this.ScenarioStart();
-#line 52
- testRunner.Given("I have valid endpoint", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 53
- testRunner.When(string.Format("I do a \"GET\" request for resource \"posts/{0}\"", postId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
 #line 54
+ testRunner.Given(string.Format("I have valid endpoint for resource \"posts/{0}\"", postId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 55
+ testRunner.When("I do a \"GET\" request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 56
  testRunner.Then("I should receive the status code as \"404\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -409,7 +413,7 @@ namespace RestApiTestExercise.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postId", "postId")]
         public virtual void ValidateErrorReponseForInvalidPostIdForPosts_PostId()
         {
-#line 51
+#line 53
  this.ValidateErrorReponseForInvalidPostIdForPosts("postId", ((string[])(null)));
 #line hidden
         }
@@ -421,7 +425,7 @@ namespace RestApiTestExercise.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postId", "12000")]
         public virtual void ValidateErrorReponseForInvalidPostIdForPosts_12000()
         {
-#line 51
+#line 53
  this.ValidateErrorReponseForInvalidPostIdForPosts("12000", ((string[])(null)));
 #line hidden
         }
@@ -433,8 +437,20 @@ namespace RestApiTestExercise.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postId", "1*)")]
         public virtual void ValidateErrorReponseForInvalidPostIdForPosts_1()
         {
-#line 51
+#line 53
  this.ValidateErrorReponseForInvalidPostIdForPosts("1*)", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate error reponse for invalid postId for posts: 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Validate Posts")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postId", "0")]
+        public virtual void ValidateErrorReponseForInvalidPostIdForPosts_0()
+        {
+#line 53
+ this.ValidateErrorReponseForInvalidPostIdForPosts("0", ((string[])(null)));
 #line hidden
         }
         
@@ -442,7 +458,7 @@ namespace RestApiTestExercise.Features
         {
             string[] tagsOfScenario = exampleTags;
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate no results for invalid postId for comments", null, exampleTags);
-#line 63
+#line 66
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -462,16 +478,16 @@ namespace RestApiTestExercise.Features
             else
             {
                 this.ScenarioStart();
-#line 64
- testRunner.Given("I have valid endpoint", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 65
- testRunner.When(string.Format("I do a \"GET\" request for resource \"posts/{0}/comments\"", postId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 66
- testRunner.Then("I should receive the status code as \"200\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
 #line 67
+ testRunner.Given(string.Format("I have valid endpoint for resource \"posts/{0}/comments\"", postId), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 68
+ testRunner.When("I do a \"GET\" request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 69
+ testRunner.Then("I should receive the status code as \"404\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 70
  testRunner.And("I should expect to see \"0\" results in the response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
@@ -485,7 +501,7 @@ namespace RestApiTestExercise.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postId", "postId")]
         public virtual void ValidateNoResultsForInvalidPostIdForComments_PostId()
         {
-#line 63
+#line 66
  this.ValidateNoResultsForInvalidPostIdForComments("postId", ((string[])(null)));
 #line hidden
         }
@@ -497,7 +513,7 @@ namespace RestApiTestExercise.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postId", "12000")]
         public virtual void ValidateNoResultsForInvalidPostIdForComments_12000()
         {
-#line 63
+#line 66
  this.ValidateNoResultsForInvalidPostIdForComments("12000", ((string[])(null)));
 #line hidden
         }
@@ -509,19 +525,31 @@ namespace RestApiTestExercise.Features
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postId", "1*)")]
         public virtual void ValidateNoResultsForInvalidPostIdForComments_1()
         {
-#line 63
+#line 66
  this.ValidateNoResultsForInvalidPostIdForComments("1*)", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate the get post and comments return 403 with HTTP")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate no results for invalid postId for comments: 0")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Validate Posts")]
-        public virtual void ValidateTheGetPostAndCommentsReturn403WithHTTP()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:postId", "0")]
+        public virtual void ValidateNoResultsForInvalidPostIdForComments_0()
+        {
+#line 66
+ this.ValidateNoResultsForInvalidPostIdForComments("0", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Validate the get post and post/comments uris return 403 with HTTP")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Validate Posts")]
+        public virtual void ValidateTheGetPostAndPostCommentsUrisReturn403WithHTTP()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate the get post and comments return 403 with HTTP", null, ((string[])(null)));
-#line 75
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate the get post and post/comments uris return 403 with HTTP", null, ((string[])(null)));
+#line 79
  this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -541,16 +569,16 @@ namespace RestApiTestExercise.Features
             else
             {
                 this.ScenarioStart();
-#line 76
- testRunner.Given("I have valid endpoint", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 80
+ testRunner.Given("I have valid endpoint for resource \"posts/2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 77
+#line 81
  testRunner.And("I change the endpoint to be \"http\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 78
- testRunner.When("I do a \"GET\" request for resource \"posts/2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 82
+ testRunner.When("I do a \"GET\" request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 79
+#line 83
  testRunner.Then("I should receive the status code as \"403\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

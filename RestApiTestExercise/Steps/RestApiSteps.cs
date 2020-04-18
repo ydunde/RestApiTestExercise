@@ -27,25 +27,30 @@ namespace RestApiTestExercise.Steps
             _requestBodyBuilder = new RequestBodyBuilder();
             _headers = new Dictionary<string, string>();
             responseHandler = new ResponseHandler(_scenarioContext);
-
+            _restHelper = new HttpHelper();
 
         }
 
-        [Given(@"I have valid endpoint")]
-        public void GivenIHaveValidEndpoint()
-        {
-            _restHelper = new HttpHelper(_scenarioContext.Get<string>("baseApiURL"));
+        [Given(@"I have valid endpoint for resource ""(.*)""")]
+        public void GivenIHaveValidEndpoint(string resourceUri)
+        { 
+
+             resourceUri = _scenarioContext.Get<string>("baseApiURL") + resourceUri;
+            _scenarioContext.Set(resourceUri, "resourceUri");
         }
 
-        [When(@"I do a ""(.*)"" request for resource ""(.*)""")]
-        [Given(@"I do a ""(.*)"" request for resource ""(.*)""")]
-        public void WhenIDoARequestForResource(string httpMethod, string resourceUri)
+ 
+
+
+        [When(@"I do a ""(.*)"" request")]
+        [Given(@"I do a ""(.*)"" request")]
+        public void WhenIDoARequest(string httpMethod)
         {
 
             body = _requestBodyBuilder.Build(httpMethod, "");
+           
 
-
-            var response = _restHelper.SendAsync(_headers, httpMethod, new StringContent(body, Encoding.UTF8, "application/json"), resourceUri);
+            var response = _restHelper.SendAsync(_headers, httpMethod, new StringContent(body, Encoding.UTF8, "application/json"), _scenarioContext.Get<string>("resourceUri"));
 
             responseHandler.Handle(response);
         }
@@ -56,8 +61,8 @@ namespace RestApiTestExercise.Steps
         public void ThenIShouldReceiveTheStatusCodeAs(int statusCode)
         {
 
-            _scenarioContext.Get<int>("statusCode").Should().Be(statusCode, $"Expected  StatusCode:{statusCode} but actual StatusCode:{ _scenarioContext.Get<int>("statusCode")}");
-
+            _scenarioContext.Get<int>("statusCode").Should().Be(statusCode, $"\nExpected StatusCode:{statusCode} but actual StatusCode:{ _scenarioContext.Get<int>("statusCode")}");
+            
         }
 
         [Then(@"I should receive the success state as ""(.*)""")]
@@ -89,8 +94,8 @@ namespace RestApiTestExercise.Steps
             responseMessage.Count.Should().Be(resultsCount);
         }
 
-        [Then(@"I should have ""(.*)"" as ""(.*)"" in comments")]
-        public void ThenIShouldHaveAsInComments(string propertyName, string propertyValue)
+        [Then(@"I should have ""(.*)"" as ""(.*)"" in all comments")]
+        public void ThenIShouldHaveAsInAllComments(string propertyName, string propertyValue)
         {
             var responseMessage = _scenarioContext.Get<JToken>("httpResponseMessage");
             foreach (var jsonProperty in responseMessage.Children())
@@ -108,7 +113,7 @@ namespace RestApiTestExercise.Steps
             _scenarioContext.Set(responseMessage, "comments");
         }
 
-        [Then(@"I should expect to all comments for postId: ""(.*)"" are returned")]
+        [Then(@"I should expect all comments for postId: ""(.*)"" are returned")]
         public void ThenIShouldExpectToAllCommentsForPostIdAreReturned(string postId)
         {
             var allComments = JToken.Parse(_scenarioContext.Get<JToken>("comments").ToString());
@@ -126,7 +131,7 @@ namespace RestApiTestExercise.Steps
         public void GivenIChangeTheEndpointToBe(string protocol)
         {
             var baseUrl = protocol + ":" + _scenarioContext.Get<string>("baseApiURL").Split(":")[1];
-            _restHelper.SetBaseUrl(baseUrl);
+            
         }
 
 
