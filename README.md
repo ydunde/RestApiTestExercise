@@ -3,7 +3,7 @@ C# Rest Automation Exercise
 
 Using MsTest, SpecFlow and HttpClient to develop the automation tests.
 
-**###### Using the Buid Configuraion tests can be pointed to run in QA or UAT by loading the environment specific settings**
+**Using the Buid Configuraion tests can be pointed to run in QA or UAT by loading the environment specific settings**
 
 
 # Observations:
@@ -14,13 +14,13 @@ Using MsTest, SpecFlow and HttpClient to develop the automation tests.
 5. Resource "posts/0/comments" is returning 200 response code with empty results. Arguably this can be 404. 
 6. Performance and Security (injections) not considered for this exercise.
 
-**###### I would probably will deside not go LIVE with this API for below reasons**
+###### I would probably will deside not go LIVE with this API for below reasons
     1. No security on this api resources.
     2. API to be consumed in UK. It seems globalisation/location aspects not considered.
     3. Performance of api  is unknown.
     4. Minor issues with escape chars and response codes.
 
-**###### I would probably will deside to go LIVE with this API for below reasons**
+###### I would probably will deside to go LIVE with this API for below reasons
     1. Intended for Open use and no security required.
     2. Globalisation/Location is not required and expecting the consumers to handle as per their needs.
     3. Support Multiple MediaTypes not required/mandatory to go give , consumers can handle at their end.
