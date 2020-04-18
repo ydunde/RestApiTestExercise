@@ -2,7 +2,7 @@
 C# Rest Automation Exercise
 
 Using MsTest, SpecFlow and HttpClient to develop the automation tests.
-# Using the Buid Configuraion tests can be pointed to run in QA or UAT by loading the environment specific settings
+#Using the Buid Configuraion tests can be pointed to run in QA or UAT by loading the environment specific settings
 
 
 # Observations:
