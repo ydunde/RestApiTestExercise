@@ -1,7 +1,7 @@
 # RestApiTestExercise
 C# Rest Automation Exercise
 
-Using MsTest, SpecFlow and HttpClient to develop the automation tests.
+Using VisualStudio 2019, .Net Core 3.1,MsTest, SpecFlow and HttpClient to develop the automation tests.
 
 **Using the Buid Configuraion tests can be pointed to run in QA or UAT by loading the environment specific settings**
 
