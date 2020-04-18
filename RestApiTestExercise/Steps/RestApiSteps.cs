@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using RestApiTestExercise.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using TechTalk.SpecFlow;
 
@@ -36,14 +37,13 @@ namespace RestApiTestExercise.Steps
         }
 
         [When(@"I do a ""(.*)"" request for resource ""(.*)""")]
+        [Given(@"I do a ""(.*)"" request for resource ""(.*)""")]
         public void WhenIDoARequestForResource(string httpMethod, string resourceUri)
         {
 
 
-            _headers.Add("Accept", "application/json");
-            _headers.Add("ContentType", "application/json");
 
-            body = _requestBodyBuilder.Build(httpMethod, "requestBody.json");
+            body = _requestBodyBuilder.Build(httpMethod, "");
 
             var response = _restHelper.SendAsync(_headers, httpMethod, new StringContent(body), resourceUri);
 
@@ -52,18 +52,19 @@ namespace RestApiTestExercise.Steps
 
 
         [Then(@"I should receive the status code as ""(.*)""")]
+        [Given(@"I should receive the status code as ""(.*)""")]
         public void ThenIShouldReceiveTheStatusCodeAs(int statusCode)
         {
 
-            _scenarioContext.Get<int>("statusCode").Should().Be(statusCode, $"Successful api request should have successStatusCode as {statusCode}");
+            _scenarioContext.Get<int>("statusCode").Should().Be(statusCode, $"Request should have StatusCode as {statusCode}");
 
         }
 
-        [Then(@"I should receive the success response")]
-        public void TheIShouldReceiveTheSuccessResponse()
+        [Then(@"I should receive the success state as ""(.*)""")]
+        public void TheIShouldReceiveTheSuccessResponse(bool successState)
         {
 
-            _scenarioContext.Get<bool>("isSuccessStatusCode").Should().Be(true, $"Successful api request should have isSuccessStatusCode as true");
+            _scenarioContext.Get<bool>("isSuccessStatusCode").Should().Be(successState, $"Api request should have isSuccessStatusCode as {successState}");
 
         }
         [Then(@"I should expect to see below details in response")]
@@ -80,6 +81,14 @@ namespace RestApiTestExercise.Steps
                 }
             }
         }
+
+        [Then(@"I should expect to see ""(.*)"" results in the response")]
+        public void ThenIShouldExpectToSeeResultsInTheResponse(int resultsCount)
+        {
+            var responseMessage = _scenarioContext.Get<JArray>("httpResponseMessage");
+            responseMessage.Count.Should().Be(resultsCount);
+        }
+
         [Then(@"I should have ""(.*)"" as ""(.*)"" in comments")]
         public void ThenIShouldHaveAsInComments(string propertyName, string propertyValue)
         {
@@ -90,6 +99,29 @@ namespace RestApiTestExercise.Steps
                 jsonProperty[propertyName].ToString().Should().Be(propertyValue);
             }
         }
+
+        [Given(@"I should expect to see ""(.*)"" comments in the response")]
+        public void GivenIShouldExpectToSeeResultsInTheResponse(int resultsCount)
+        {
+            var responseMessage = _scenarioContext.Get<JArray>("httpResponseMessage");
+            responseMessage.Count.Should().Be(resultsCount);
+            _scenarioContext.Set(responseMessage,"comments");
+        }
+        [Then(@"I should expect to all comments for postId: ""(.*)"" are returned")]
+        public void ThenIShouldExpectToAllCommentsForPostIdAreReturned(string postId)
+        {
+            var allComments = JToken.Parse(_scenarioContext.Get<JToken>("comments").ToString());
+            var commentsWithPostIdFromAllComments = allComments.Where(j => j["postId"].Value<string>() == postId).Select(j => j);
+
+
+            var commentsWithPostId = _scenarioContext.Get<JArray>("httpResponseMessage");
+
+            Console.WriteLine($"PostId: {postId} - comments For single post request{commentsWithPostId.Count} and comments from all comments request{commentsWithPostIdFromAllComments.Count()}");
+            commentsWithPostId.Count.Should().Be(commentsWithPostIdFromAllComments.Count());
+        }
+
+      
+
     }
 }
     
