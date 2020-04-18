@@ -71,3 +71,10 @@
 	| postId |
 	| 12000  |
 	| 1*)    |  
+
+	Scenario: Validate the get post and comments return 403 with HTTP 
+	Given I have valid endpoint
+	And I change the endpoint to be "http"
+	When I do a "GET" request for resource "posts/2"
+	Then I should receive the status code as "403"
+ 

@@ -37,9 +37,10 @@ namespace RestApiTestExercise.Helpers
                 Console.WriteLine(headerItem + " : " + HeaderItemValue);
                 _scenarioContext.Set(HeaderItemValue, headerItem.Key);
             }
-          
+
             Console.WriteLine($"ReasonPhrase:{response.ReasonPhrase}");
             Console.WriteLine($"ResponseMessage:{JToken.Parse(response.Content.ReadAsStringAsync().Result)}");
+
             _scenarioContext.Set(response.ReasonPhrase, "reasonPhrase");
             _scenarioContext.Set(JToken.Parse(response.Content.ReadAsStringAsync().Result), "httpResponseMessage");
             _scenarioContext.Set(response.IsSuccessStatusCode, "isSuccessStatusCode");

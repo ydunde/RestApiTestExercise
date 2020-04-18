@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using TechTalk.SpecFlow;
 
 namespace RestApiTestExercise.Steps
@@ -41,11 +42,10 @@ namespace RestApiTestExercise.Steps
         public void WhenIDoARequestForResource(string httpMethod, string resourceUri)
         {
 
-
-
             body = _requestBodyBuilder.Build(httpMethod, "");
 
-            var response = _restHelper.SendAsync(_headers, httpMethod, new StringContent(body), resourceUri);
+
+            var response = _restHelper.SendAsync(_headers, httpMethod, new StringContent(body, Encoding.UTF8, "application/json"), resourceUri);
 
             responseHandler.Handle(response);
         }
@@ -56,7 +56,7 @@ namespace RestApiTestExercise.Steps
         public void ThenIShouldReceiveTheStatusCodeAs(int statusCode)
         {
 
-            _scenarioContext.Get<int>("statusCode").Should().Be(statusCode, $"Request should have StatusCode as {statusCode}");
+            _scenarioContext.Get<int>("statusCode").Should().Be(statusCode, $"Expected  StatusCode:{statusCode} but actual StatusCode:{ _scenarioContext.Get<int>("statusCode")}");
 
         }
 
@@ -64,7 +64,7 @@ namespace RestApiTestExercise.Steps
         public void TheIShouldReceiveTheSuccessResponse(bool successState)
         {
 
-            _scenarioContext.Get<bool>("isSuccessStatusCode").Should().Be(successState, $"Api request should have isSuccessStatusCode as {successState}");
+            _scenarioContext.Get<bool>("isSuccessStatusCode").Should().Be(successState, $"Expected isSuccessStatusCode as {successState} but actual isSuccessStatusCode is { _scenarioContext.Get<bool>("isSuccessStatusCode")}");
 
         }
         [Then(@"I should expect to see below details in response")]
@@ -105,8 +105,9 @@ namespace RestApiTestExercise.Steps
         {
             var responseMessage = _scenarioContext.Get<JArray>("httpResponseMessage");
             responseMessage.Count.Should().Be(resultsCount);
-            _scenarioContext.Set(responseMessage,"comments");
+            _scenarioContext.Set(responseMessage, "comments");
         }
+
         [Then(@"I should expect to all comments for postId: ""(.*)"" are returned")]
         public void ThenIShouldExpectToAllCommentsForPostIdAreReturned(string postId)
         {
@@ -120,11 +121,18 @@ namespace RestApiTestExercise.Steps
             commentsWithPostId.Count.Should().Be(commentsWithPostIdFromAllComments.Count());
         }
 
-      
+
+        [Given(@"I change the endpoint to be ""(.*)""")]
+        public void GivenIChangeTheEndpointToBe(string protocol)
+        {
+            var baseUrl = protocol + ":" + _scenarioContext.Get<string>("baseApiURL").Split(":")[1];
+            _restHelper.SetBaseUrl(baseUrl);
+        }
+
 
     }
 }
-    
 
-    
+
+
 

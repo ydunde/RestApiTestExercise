@@ -7,16 +7,23 @@ namespace RestApiTestExercise.Helpers
     class HttpHelper
     {
         private static HttpClient _httpClient;
-
-       
+        private readonly RequestHeaderBuilder requestHeaderBuilder;
+     
 
         public HttpHelper(string baseUrl)
         {
-            
-            GetClient(baseUrl);
+                GetClient(baseUrl);
+            requestHeaderBuilder = new RequestHeaderBuilder();
+        }
+
+        public void SetBaseUrl(string baseUrl)
+        {
+            _httpClient.BaseAddress = new Uri(baseUrl);
+
         }
         public HttpClient GetClient(string baseUrl)
         {
+      
             if (_httpClient == null)
                 _httpClient = new HttpClient() { BaseAddress = new Uri(baseUrl) };
 
@@ -26,7 +33,7 @@ namespace RestApiTestExercise.Helpers
 
         public HttpResponseMessage SendAsync(Dictionary<string, string> headers, string httpMethod, HttpContent body, string resourceUri)
         {
-           var request = new HttpRequestMessage();
+            var request = new HttpRequestMessage();
 
             switch (httpMethod.ToUpper())
             {
@@ -44,29 +51,23 @@ namespace RestApiTestExercise.Helpers
                 default:
                     break;
             }
-            AddJsonContentHeaders(request);
-            request.RequestUri = new Uri(resourceUri, UriKind.Relative);
 
+            requestHeaderBuilder.BuildDefaultHeaders(request);
             // Adding any additional headers required
-            foreach (var header in headers)
-            {
-                request.Headers.Add(header.Key, header.Value);
-            }
+            requestHeaderBuilder.AddAdditionalHeaders(headers, request);
+
+            request.RequestUri = new Uri(resourceUri, UriKind.Relative);
 
             if (httpMethod.ToUpper() == "POST" || httpMethod.ToUpper() == "PUT")
             {
                 request.Content = body;
+
             }
-            return _httpClient.SendAsync(request).Result;
+
+            return _httpClient.SendAsync(request).Result; ;
         }
 
-        private void AddJsonContentHeaders(HttpRequestMessage request)
-        {
-         
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("ContentType", "application/json");
-            request.Headers.Add("Accept-Language", "en-gb");
-        }
+
 
     }
 }
