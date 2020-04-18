@@ -4,7 +4,7 @@ C# Rest Automation Exercise
 Using MsTest, SpecFlow and HttpClient to develop the automation tests.
 
 
-#Observations.
+# Observations:
 1. No Security : No Basic/OAuth is implemented . API is not secured at all.Http port is active.
 2. Results are returned in Latin language. Assuming that this api will be consumed within UK , results should be translated. Preferably by    setting the "Accept-Language" should be able to return the results in appropriate Language.
 3. Will be good if multiple media types are supported. At the moments  "application/json" is supported.
